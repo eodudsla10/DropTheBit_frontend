@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from . import arbitrage
+from . import news
 from .main import star_coin, star_market
 from .main.view_table import standard
 from .member import login, mypage, register
@@ -24,6 +25,11 @@ def get_all_coin_info(request):
     data = arbitrage.get_all_coin_info(coins, STANDARD_MARKET, TARGET_MARKET)
     return Response(data)
     #return Response()
+
+@api_view(['GET'])
+def get_news_info(request):
+    data = news.get_news()
+    return Response(data)
 
 def update_standard(request):
     user_id = request.POST['user_id']
