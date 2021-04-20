@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Container, Alert, Button, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label } from 'reactstrap';
 import Widget from '../../components/Widget';
 import { registerUser, registerError } from '../../actions/register';
-import microsoft from '../../assets/microsoft.png';
 import Login from '../login';
 
 class Register extends React.Component {
@@ -17,9 +16,10 @@ class Register extends React.Component {
         super(props);
 
         this.state = {
+            id: '',
             email: '',
             password: '',
-            confirmPassword: ''
+            name: '',
         };
 
         this.doRegister = this.doRegister.bind(this);
@@ -28,6 +28,12 @@ class Register extends React.Component {
         this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
         this.checkPassword = this.checkPassword.bind(this);
         this.isPasswordValid = this.isPasswordValid.bind(this);
+        this.changeId = this.changeId.bind(this);
+        this.changeName = this.changeName.bind(this);
+    }
+
+    changeId(event) {
+        this.setState({id: event.target.value});
     }
 
     changeEmail(event) {
@@ -42,12 +48,16 @@ class Register extends React.Component {
         this.setState({confirmPassword: event.target.value});
     }
 
+    changeName(event) {
+        this.setState({name: event.target.value});
+    }
+
     checkPassword() {
         if (!this.isPasswordValid()) {
             if (!this.state.password) {
-                this.props.dispatch(registerError("Password field is empty"));
+                this.props.dispatch(registerError("비밀번호를 입력해 주세요"));
             } else {
-                this.props.dispatch(registerError("Passwords are not equal"));
+                this.props.dispatch(registerError("비밀번호가 일치하지 않습니다"));
             }
             setTimeout(() => {
                 this.props.dispatch(registerError());
@@ -66,8 +76,10 @@ class Register extends React.Component {
         } else {
             this.props.dispatch(registerUser({
                 creds: {
+                    id: this.state.id,
                     email: this.state.email,
-                    password: this.state.password
+                    password: this.state.password,
+                    name: this.state.name,
                 },
                 history: this.props.history
             }));
@@ -87,9 +99,9 @@ class Register extends React.Component {
         return (
             <div className="auth-page">
                 <Container>
-                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Login to your Web App</h3>}>
+                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">회원가입</h3>}>
                         <p className="widget-auth-info">
-                            Please fill all fields below.
+                            아래 내용을 입력해 주세요.
                         </p>
                         <form onSubmit={this.doRegister}>
                             {
@@ -100,7 +112,20 @@ class Register extends React.Component {
                                 )
                             }
                             <FormGroup className="mt">
-                                <Label for="email">Email</Label>
+                                <Label for="text">아이디</Label>
+                                <InputGroup className="input-group-no-border">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>
+                                            <i className="la la-user text-white"/>
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input id="id" className="input-transparent pl-3" value={this.state.id}
+                                           onChange={this.changeId} type="text"
+                                           required name="text" placeholder="ID"/>
+                                </InputGroup>
+                            </FormGroup>
+                            <FormGroup className="mt">
+                                <Label for="email">이메일</Label>
                                 <InputGroup className="input-group-no-border">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>
@@ -113,7 +138,7 @@ class Register extends React.Component {
                                 </InputGroup>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="password">Password</Label>
+                                <Label for="password">비밀번호</Label>
                                 <InputGroup className="input-group-no-border">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>
@@ -126,7 +151,7 @@ class Register extends React.Component {
                                 </InputGroup>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="confirmPassword">Confirm</Label>
+                                <Label for="confirmPassword">비밀번호 확인</Label>
                                 <InputGroup className="input-group-no-border">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>
@@ -138,24 +163,26 @@ class Register extends React.Component {
                                            required name="confirmPassword" placeholder="Confirm"/>
                                 </InputGroup>
                             </FormGroup>
+                            <FormGroup className="mt">
+                                <Label for="text">이름</Label>
+                                <InputGroup className="input-group-no-border">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>
+                                            <i className="la la-user text-white"/>
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input id="name" className="input-transparent pl-3" value={this.state.name}
+                                           onChange={this.changeName} type="text"
+                                           required name="text" placeholder="Name"/>
+                                </InputGroup>
+                            </FormGroup>
                             <div className="bg-widget-transparent auth-widget-footer">
                                 <Button type="submit" color="danger" className="auth-btn"
-                                        size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Register'}</Button>
+                                        size="sm" style={{color: '#fff'}}>{this.props.isFetching ? '로딩중...' : '등록하기'}</Button>
                                 <p className="widget-auth-info mt-4">
-                                    Already have the account? Login now!
+                                    이미 회원이세요? 로그인 하세요!
                                 </p>
-                                <Link className="d-block text-center mb-4" to="login">Enter the account</Link>
-                                <div className="social-buttons">
-                                    <Button color="primary" className="social-button">
-                                        <i className="social-icon social-google"/>
-                                        <p className="social-text">GOOGLE</p>
-                                    </Button>
-                                    <Button color="success" className="social-button">
-                                        <i className="social-icon social-microsoft"
-                                           style={{backgroundImage: `url(${microsoft})`}}/>
-                                        <p className="social-text" style={{color: '#fff'}}>MICROSOFT</p>
-                                    </Button>
-                                </div>
+                                <Link className="d-block text-center mb-4" to="login">로그인 하기</Link>
                             </div>
                         </form>
                     </Widget>

@@ -37,6 +37,7 @@ export function logoutUser() {
     };
 }
 
+// TODO: 로그인하면 로그인 정보를 백에서 API를 받아와서 예외 처리하기
 export function loginUser(creds) {
     return (dispatch) => {
 
@@ -45,7 +46,7 @@ export function loginUser(creds) {
         if (creds.email.length > 0 && creds.password.length > 0) {
             localStorage.setItem('authenticated', true)
         } else {
-            dispatch(loginError('Something was wrong. Try again'));
+            dispatch(loginError('잘못된 정보입니다. 다시 시도해 주세요.'));
         }
     }
 }
