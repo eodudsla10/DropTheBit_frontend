@@ -1,11 +1,24 @@
 import React, { Component } from "react";
+import {CoinApi} from '../../../api/api';
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 class CoinInfo extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      flag : false,
+    }
+  }
+  axiosRes = {};
+  componentDidMount(){
+    const axiosApi = new CoinApi();
+    axiosApi.coinList().then(res => this.axiosRes = res).then(console.log(this.axiosRes)).then(this.setState({flag:true}));
+  }
   render() {
+<<<<<<< HEAD
     var lists = [{'id': 'BTC', 'name_kr': '', 'name_en': '', 'standard': {'market': 'upbit', 'market_KRW': 81475000, 'market_USD': 72927.86}, 'target': [{'market': 'binance', 'market_KRW': 71502006, 'market_USD': 64001.08, 'diff_KRW': 9972993, 'diff_USD': 8926.78, 'diff_percent': 12.24}]},
     {'id': 'ETH', 'name_kr': '', 'name_en': '', 'standard': {'market': 'upbit', 'market_KRW': 3006000, 'market_USD': 2690.66}, 'target': [{'market': 'binance', 'market_KRW': 2638245, 'market_USD': 2361.48, 'diff_KRW': 367754, 'diff_USD': 329.18, 'diff_percent': 12.23}]},
     {'id': 'NEO', 'name_kr': '', 'name_en': '', 'standard': {'market': 'upbit', 'market_KRW': 88540, 'market_USD': 79.25}, 'target': [{'market': 'binance', 'market_KRW': 77548, 'market_USD': 69.41, 'diff_KRW': 10991, 'diff_USD': 9.84, 'diff_percent': 12.41}]},
@@ -124,11 +137,53 @@ class CoinInfo extends Component {
     {'id': 'AXS', 'name_kr': '', 'name_en': '', 'standard': {'market': 'upbit', 'market_KRW': 9700, 'market_USD': 8.68}, 'target': [{'market': 'binance', 'market_KRW': 8522, 'market_USD': 7.63, 'diff_KRW': 1177, 'diff_USD': 1.05, 'diff_percent': 12.14}]},
     {'id': 'STX', 'name_kr': '', 'name_en': '', 'standard': {'market': 'upbit', 'market_KRW': 2815, 'market_USD': 2.52}, 'target': [{'market': 'binance', 'market_KRW': 2463, 'market_USD': 2.2, 'diff_KRW': 351, 'diff_USD': 0.32, 'diff_percent': 12.5}]},
     ]
+=======
+    // var { id, name_kr, name_en } = this.state.props;
+
+    var lists = [
+      {
+        id: "BTC",
+        name_kr: "비트코인",
+        name_en: "Bitcoin",
+        standard: {
+          market: "Upbit",
+          market_KRW: 77777777,
+          market_USD: 66666.32,
+        },
+        target: {
+          market: "Binance",
+          market_KRW: 66666666,
+          market_USD: 5555500,
+          diff_KRW: 11111111,
+          diff_USD: 1111132,
+          diff_percent: 1442,
+        },
+      },
+      {
+        id: "ETH",
+        name_kr: "이더리움",
+        name_en: "Etherem",
+        standard: {
+          market: "Upbit",
+          market_KRW: 11111,
+          market_USD: 6666623232323.32,
+        },
+        target: {
+          market: "Binance",
+          market_KRW: 62226666666,
+          market_USD: 55551233500,
+          diff_KRW: 1111111211,
+          diff_USD: 1111122323323,
+          diff_percent: 14422222222,
+        },
+      },
+    ];
+>>>>>>> 5b26f72d1d7480bd71f3a9f09d658a4acc88accc
     return (
       <tbody>
-        {lists.map((row) => (
+        {(this.state.flag) ? this.axiosRes.map((row) => (
           <tr>
-            <td>1</td>
+            <td>{row}</td>
             <td>
               <img
                 src={"https://static.upbit.com/logos/" + row.id + ".png"}
@@ -149,7 +204,7 @@ class CoinInfo extends Component {
             {row.target[0].diff_percent}% ({numberWithCommas(row.target[0].diff_KRW)})
             </td>
           </tr>
-        ))}
+        )): " nothing"}
       </tbody>
     );
   }
