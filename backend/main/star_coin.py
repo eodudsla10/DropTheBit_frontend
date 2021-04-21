@@ -1,4 +1,4 @@
-#from MyApplication.MongoDbManager import MongoDbManager
+# from MyApplication.MongoDbManager import MongoDbManager
 
 def update_star_coin(user_id, star_coin, status):
     if status == 1: # 추가
