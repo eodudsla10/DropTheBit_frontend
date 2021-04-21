@@ -10,13 +10,12 @@ from ..djongoManager import *
 
 def create_user(user_id, user_pw, email, name):
     # login 페이지에서 쓰는 get_user_info 혹은 get_user_info_id 쓰면 됨
-    dbUserData = get_user_info({'id':user_id,})
+    dbUserData = get_user_info({'id':user_id})
     if dbUserData is None:
-        return 400, "중복되는 아이디가 있습니다."
-        
+        return 400
     else:
         # insert
-        dbUserData = insert_user_info({'user_id':user_id, 'user_pw':user_pw, 'email':email, 'name':name})
-        return 200, json.dumps(dbUserData)
+        insert_user_info({'user_id':user_id, 'user_pw':user_pw, 'email':email, 'name':name})
+        return 200
          
     

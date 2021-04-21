@@ -27,42 +27,44 @@ def get_all_coin_info(request):
     return Response(data)
     #return Response()
 
-@api_view(['GET'])
+
 def get_news_info(request):
     data = news.get_news()
     return Response(data)
 
+@api_view(['POST'])
 def update_standard(request):
     user_id = request.POST['user_id']
     standard_market = request.POST['standard_market']
     standard.update_standard(user_id, standard_market)
 
+@api_view(['POST'])
 def update_star_coin(request):
     user_id = request.POST['user_id']
     star_coin = request.POST['star_coin']
     status = request.POST['status']
     star_coin.update_star_coin(user_id, star_coin, status)
 
+@api_view(['POST'])
 def update_star_market(request):
     user_id = request.POST['user_id']
     star_market = request.POST['star_market']
     status = request.POST['status']
     star_coin.update_star_market(user_id, star_market, status)
 
+@api_view(['GET'])
 def get_login(request):
     user_id = request.GET.get('user_id') # 이거 view에서 넘겨받아야 한다
     user_pw = request.GET.get('user_pw')
-    status , data = login.get_login(user_id, user_pw) # 200 성공, 400 비번틀림, 404 회원정보 없음
+    status = login.get_login(user_id, user_pw) # 200 성공, 400 비번틀림, 404 회원정보 없음
     if status == 200:
-        # return HttpResponse(status=200)
-        return HttpResponse(data, status=200)
+        return HttpResponse(status=200)
     elif status == 400:
-        # return HttpResponse(status=400)
-        return HttpResponse("비밀번호가 틀렸습니다", status = 400)
+        return HttpResponse(status = 400)
     else:
-        # return HttpResponse(status=404)
-        return HttpResponse("회원정보가 존재하지 않습니다", status = 404)
+        return HttpResponse(status = 404)
 
+@api_view(['POST'])
 def create_user(request):
     user_id = request.POST['user_id']
     user_pw = request.POST['user_pw']
@@ -74,9 +76,10 @@ def create_user(request):
     else:
         return HttpResponse(status = 400)
 
+@api_view(['GET'])
 def get_mypage(request):
     user_id = request.GET.get('user_id')
-    data = mypage.get_mypage(user_id)
+    data = mypage.get_mypage(user_id) #유저 아이디만 전달되는 형태
     return HttpResponse(data)
 
 

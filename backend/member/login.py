@@ -10,12 +10,12 @@ def get_login(user_id, user_pw):
     if dbUserData is None:
         dbUserData = get_user_info({'user_id':user_id})
         if dbUserData is None:
-           return 404, "회원정보가 존재하지 않습니다"
+           return 404
         else:
-           return 400, "비밀번호가 틀렸습니다"
+           return 400
     else:
         del dbUserData['_id']  #임의로 오는 '_id'라는 것을 지워주고 리턴
-        return 200, json.dumps(dbUserData) #그냥 status 값만 보내주면 된다, 나중에 json 삭제 필요
+        return 200 #그냥 status 값만 보내주면 된다, 나중에 json 삭제 필요
         
 
 
