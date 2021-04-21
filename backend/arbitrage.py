@@ -28,7 +28,7 @@ def get_all_coin_info(coins, std_market, tar_market):
     #f.write('[')
     for coin in coins:
         data = get_one_coin_info(coin, std_market, tar_market)
-        #f.write(str(data)+',\n')
+        #f.write(str(data)+',\n')g
         all_coin_info.append(data)
     #f.write(']')
     #f.close()
