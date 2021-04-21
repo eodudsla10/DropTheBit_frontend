@@ -15,7 +15,7 @@ def get_login(user_id, user_pw):
            return 400
     else:
         del dbUserData['_id']  #임의로 오는 '_id'라는 것을 지워주고 리턴
-        return 200 #그냥 status 값만 보내주면 된다, 나중에 json 삭제 필요
+        return 200 #그냥 status 값만 보내주면 된다, 나중에 json 삭제 필요b
         
 
 
