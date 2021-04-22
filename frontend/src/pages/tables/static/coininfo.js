@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import axios from "axios";
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -7,10 +8,26 @@ function numberWithCommas(x) {
 
 class CoinInfo extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      coinListFromHome: [],
+    };
+  }
+  
+  getpost = async() => {
+    const {data} = await axios.get('http://localhost:8000/main');
+    this.setState({coinListFromHome: {data}.data});
+  }
+  
+  async componentDidMount() {
+    this.getpost();
+  }
+  
   render() {
     return (
       <tbody>
-        {this.props.coinList.map((row) => (
+        {this.state.coinListFromHome.map((row) => (
           <tr key={row.id}>
             <td>{row.id}</td>
             <td>
