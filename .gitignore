@@ -5,7 +5,8 @@ venv/
 # Daeyeong Jeon's gitignore
 # backend/api/market.py
 backend/api/dd.py
-
+dropthebit/test222.py
+Bitcoim.txt
 # Jeongsun Choi's gitignore
 backend/test.py
 

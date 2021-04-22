@@ -27,7 +27,7 @@ def get_all_coin_info(request):
     return Response(data)
     #return Response()
 
-
+@api_view(['GET'])
 def get_news_info(request):
     data = news.get_news()
     return Response(data)
@@ -79,8 +79,5 @@ def create_user(request):
 @api_view(['GET'])
 def get_mypage(request):
     user_id = request.GET.get('user_id')
-    data = mypage.get_mypage(user_id) #유저 아이디만 전달되는 형태
-    return HttpResponse(data)
-
-
-
+    data = mypage.get_mypage(user_id)
+    return Response(data)

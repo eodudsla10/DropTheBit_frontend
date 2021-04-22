@@ -12,7 +12,9 @@
 """
 
 from .api import market, exchange_rate
-import json 
+import json
+from .djongoManager import *
+from .serializer import *
 
 Market_Coin_Price = market.get_market_all()
 
@@ -28,7 +30,7 @@ def get_all_coin_info(coins, std_market, tar_market):
     # f.write('[')
     for coin in coins:
         data = get_one_coin_info(coin, std_market, tar_market)
-    #     f.write(str(data)+',\n')
+        #f.write(str(data)+',\n')g
         all_coin_info.append(data)
     # f.write(']')
     # f.close()
@@ -57,20 +59,27 @@ def get_one_coin_info(coin, std_market, tar_market):
 
 
 # TODO 02: 코인별 kr 이름 받아오기
-def get_name_kr(coin):
-    name_kr = ''
-    # DB에서 coin에 대한 한글 이름 받아오기
+def get_name_kr(coin_name):
+    try:
+        res = CoinName.objects.get(coin_id=coin_name)
+        ser = CoinNameSerializer(res)
+        ret = ser.data["name_kr"]
+    except ObjectDoesNotExist:
+        ret = ""
 
-    return name_kr
+    return ret 
 
 
 # TODO 03: 코인별 en 이름 받아오기
-def get_name_en(coin):
-    name_en = ''
+def get_name_en(coin_name):
+    try:
+        res = CoinName.objects.get(coin_id=coin_name)
+        ser = CoinNameSerializer(res)
+        ret = ser.data["name_en"]
+    except ObjectDoesNotExist:
+        ret = ""
 
-    # DB에서 coin에 대한 영어 이름 받아오기
-
-    return name_en
+    return ret 
 
 
 # TODO 04: 마켓별 코인 달러 가격 구하기
