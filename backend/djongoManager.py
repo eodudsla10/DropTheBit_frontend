@@ -7,7 +7,7 @@ def get_user_info(user_id, user_pw=None):
         if user_pw is not None:
             return User.objects.get(user_id=user_id, user_pw=user_pw)
         return User.objects.get(user_id=user_id)
-    except ObjectDoesNotExist:  #
+    except ObjectDoesNotExist: 
         return None
         # return {'user_id': 'default', 'email': 'example.com', 'name': 'anonymous'}
 

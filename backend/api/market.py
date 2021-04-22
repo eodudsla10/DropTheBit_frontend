@@ -112,6 +112,9 @@ def get_market_all():
         dict_market[key] = market[key]
     return dict_market
 
+# print(get_market('upbit'))
+# print(get_market_all())
+
 # 판다스로 값을 불러올 때, dict 형식이 아니기 때문에 key, value로 쪼개서 다시 배치할 수가 없다!
 # arbitrage.py로 넘겨줘야 할 형식은 다음과 같다!
 # {

@@ -12,7 +12,9 @@
 """
 
 from .api import market, exchange_rate
-import json 
+import json
+from .djongoManager import *
+from .serializer import *
 
 Market_Coin_Price = market.get_market_all()
 
@@ -24,14 +26,14 @@ fexrate = float(exrate) #float로 형변환
 # params : 코인목록, 업비트, 거래소 목록
 def get_all_coin_info(coins, std_market, tar_market):
     all_coin_info = []
-    #f = open('C:/Users/ChoiJeongSun/Desktop/Bitcoin.txt','w')
-    #f.write('[')
+    # f = open('D:/Bitcoin.txt','w')
+    # f.write('[')
     for coin in coins:
         data = get_one_coin_info(coin, std_market, tar_market)
         #f.write(str(data)+',\n')g
         all_coin_info.append(data)
-    #f.write(']')
-    #f.close()
+    # f.write(']')
+    # f.close()
     return all_coin_info
 
 
@@ -46,7 +48,7 @@ def get_one_coin_info(coin, std_market, tar_market):
         "name_en": get_name_en(coin),
         "standard": {
             "market": std_market,
-            "market_KRW": std_price_KRW,
+            "market_KRW": int(std_price_KRW),
             "market_USD": std_price_USD,
         },
         "target": get_target_lst(coin, tar_market, std_price_KRW, std_price_USD)
@@ -57,21 +59,27 @@ def get_one_coin_info(coin, std_market, tar_market):
 
 
 # TODO 02: 코인별 kr 이름 받아오기
-def get_name_kr(coin):
-    name_kr = ''
-    # DB에서 coin에 대한 한글 이름 받아오기
-    # name_kr = MongoDbManager().get_KR_coin_name({'coin':coin})
-    return name_kr
+def get_name_kr(coin_name):
+    try:
+        res = CoinName.objects.get(coin_id=coin_name)
+        ser = CoinNameSerializer(res)
+        ret = ser.data["name_kr"]
+    except ObjectDoesNotExist:
+        ret = ""
+
+    return ret 
 
 
 # TODO 03: 코인별 en 이름 받아오기
-def get_name_en(coin):
-    name_en = ''
+def get_name_en(coin_name):
+    try:
+        res = CoinName.objects.get(coin_id=coin_name)
+        ser = CoinNameSerializer(res)
+        ret = ser.data["name_en"]
+    except ObjectDoesNotExist:
+        ret = ""
 
-    # DB에서 coin에 대한 영어 이름 받아오기
-    # name_en = MongoDbManager().get_EN_coin_name({'coin':coin})
-
-    return name_en
+    return ret 
 
 
 # TODO 04: 마켓별 코인 달러 가격 구하기
@@ -80,9 +88,9 @@ def get_price_USD(coin, market_name):
     # 환율 받아오는 것은 위에서 구냥 바로 실행되게 했다
     # bianance는 if문 처리 필요
     if market_name == "binance":
-        market_price_usd = Market_Coin_Price[market_name][coin]
+        market_price_usd = round(Market_Coin_Price[market_name][coin], 2)
     else:
-        market_price_usd = Market_Coin_Price[market_name][coin]/fexrate
+        market_price_usd = round(Market_Coin_Price[market_name][coin]/fexrate,2)
     
     return market_price_usd
 
@@ -92,9 +100,9 @@ def get_price_KRW(coin, market_name):
     # 환율은 그냥 받아짐 fxerate
     # binance는 if문 처리 필요
     if market_name == "binance":
-        market_price_krw = Market_Coin_Price[market_name][coin]*fexrate
+        market_price_krw = round(Market_Coin_Price[market_name][coin]*fexrate,2)
     else:
-        market_price_krw = Market_Coin_Price[market_name][coin]
+        market_price_krw = round(Market_Coin_Price[market_name][coin],2)
     return market_price_krw
 
 
@@ -115,11 +123,11 @@ def get_target_lst(coin, tar_market, std_price_KRW, std_price_USD):
             target_price_USD = get_price_USD(coin, target)
 
             dict_target_info["market"] = target
-            dict_target_info["market_KRW"] = target_price_KRW
+            dict_target_info["market_KRW"] = int(target_price_KRW)
             dict_target_info["market_USD"] = target_price_USD
-            dict_target_info["diff_KRW"] = std_price_KRW - target_price_KRW
-            dict_target_info["diff_USD"] = std_price_USD - target_price_USD
-            dict_target_info["diff_percent"] = ((std_price_KRW-target_price_KRW)/std_price_KRW)*100
+            dict_target_info["diff_KRW"] = int(round(std_price_KRW - target_price_KRW,2))
+            dict_target_info["diff_USD"] = round(std_price_USD - target_price_USD,2)
+            dict_target_info["diff_percent"] = round(((std_price_KRW-target_price_KRW)/std_price_KRW)*100,2)
         else:
             dict_target_info["market"] = target
             dict_target_info["market_KRW"] = ''
