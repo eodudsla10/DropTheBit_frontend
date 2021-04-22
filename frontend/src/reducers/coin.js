@@ -5,7 +5,7 @@ const defaultState = {
   coinList: [
     {
       id: "BTC",
-      name_kr: "",
+      name_kr: "dfdfdfd",
       name_en: "",
       standard: {
         market: "upbit",
@@ -29,11 +29,7 @@ const defaultState = {
 export default function getCoinInfo(state = defaultState, action) {
   switch (action.type) {
     case GET_COIN_INFO:
-      return Object.assign({}, state, {
-        coinList: [
-          ...state.coinList
-        ],
-      });
+      return Object.assign({}, state, getCoinInfo);
     default:
       return state;
   }

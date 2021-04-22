@@ -27,7 +27,6 @@ export function registerError(payload) {
 //     },
 //     history: this.props.history
 // }
-
 export function registerUser(payload) {
     return (dispatch) => {
         if (payload.creds.email.length > 0 && payload.creds.password.length > 0) {
