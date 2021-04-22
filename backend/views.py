@@ -71,4 +71,4 @@ def create_user(request):
 def get_mypage(request):
     user_id = request.GET.get('user_id')
     data = mypage.get_mypage(user_id)
-    return HttpResponse(data)
+    return Response(data)
