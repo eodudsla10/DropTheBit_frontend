@@ -58,11 +58,11 @@ def get_login(request):
     user_pw = request.GET.get('user_pw')
     status = login.get_login(user_id, user_pw) # 200 성공, 400 비번틀림, 404 회원정보 없음
     if status == 200:
-        return HttpResponse(status=200)
+        return Response(status = 200)
     elif status == 400:
-        return HttpResponse(status = 400)
+        return Response(status = 400)
     else:
-        return HttpResponse(status = 404)
+        return Response(status = 404)
 
 @api_view(['POST'])
 def create_user(request):
@@ -72,9 +72,9 @@ def create_user(request):
     name = request.POST['name']
     status = register.create_user(user_id, user_pw, email, name)
     if status == 200:
-        return HttpResponse(status = 200)
+        return Response(status = 200)
     else:
-        return HttpResponse(status = 400)
+        return Response(status = 400)
 
 @api_view(['GET'])
 def get_mypage(request):
