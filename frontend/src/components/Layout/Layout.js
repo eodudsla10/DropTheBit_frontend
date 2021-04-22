@@ -15,7 +15,6 @@ import Dashboard from '../../pages/dashboard';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
-import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
 
@@ -69,7 +68,6 @@ class Layout extends React.Component {
           <Sidebar />
           <Hammer onSwipe={this.handleSwipe}>
             <main className={s.content}>
-              <BreadcrumbHistory url={this.props.location.pathname} />
               <TransitionGroup>
                 <CSSTransition
                   key={this.props.location.key}
@@ -78,7 +76,7 @@ class Layout extends React.Component {
                 >
                   <Switch>
                     {/* <Route path="/app/main" exact render={() => <Redirect to="/app/main/dashboard" />} /> */}
-                    <Route path="/app/main" exact render={() => <Redirect to="/app/tables" />} />
+                    <Route path="/app/main" exact render={() => <Redirect to="/app/main/dashboard" />} />
                     <Route path="/app/main/dashboard" exact component={Dashboard} />
                     <Route path="/app/components/icons" exact component={UIIcons} />
                     <Route path="/app/notifications" exact component={UINotifications} />
@@ -90,7 +88,7 @@ class Layout extends React.Component {
                 </CSSTransition>
               </TransitionGroup>
               <footer className={s.contentFooter}>
-                Light Blue React Template - React admin template made by <a href="https://flatlogic.com" >Flatlogic</a>
+                코인에 대한 모든 것 Drop The Bit
               </footer>
             </main>
           </Hammer>

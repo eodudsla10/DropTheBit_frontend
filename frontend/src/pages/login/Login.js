@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Container, Alert, Button, FormGroup, Label, InputGroup, InputGroupAddon, Input, InputGroupText } from 'reactstrap';
 import Widget from '../../components/Widget';
 import { loginUser } from '../../actions/user';
-import microsoft from '../../assets/microsoft.png';
 
 class Login extends React.Component {
     static propTypes = {
@@ -20,8 +19,8 @@ class Login extends React.Component {
         super(props);
 
         this.state = {
-            email: 'admin@flatlogic.com',
-            password: 'password',
+            email: '',
+            password: '',
         };
 
         this.doLogin = this.doLogin.bind(this);
@@ -60,9 +59,9 @@ class Login extends React.Component {
         return (
             <div className="auth-page">
                 <Container>
-                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Login to your Web App</h3>}>
+                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">로그인</h3>}>
                         <p className="widget-auth-info">
-                            Use your email to sign in.
+                            로그인을 위해 이메일을 입력해 주세요.
                         </p>
                         <form onSubmit={this.doLogin}>
                             {
@@ -103,23 +102,12 @@ class Login extends React.Component {
                                   <span className="auth-btn-circle" style={{marginRight: 8}}>
                                     <i className="la la-caret-right"/>
                                   </span>
-                                  {this.props.isFetching ? 'Loading...' : 'Login'}
+                                  {this.props.isFetching ? '로딩중...' : '로그인'}
                                 </Button>
                                 <p className="widget-auth-info mt-4">
-                                    Don't have an account? Sign up now!
+                                    회원이 아니세요? 지금 회원가입 하세요!
                                 </p>
-                                <Link className="d-block text-center mb-4" to="register">Create an Account</Link>
-                                <div className="social-buttons">
-                                    <Button color="primary" className="social-button">
-                                        <i className="social-icon social-google"/>
-                                        <p className="social-text">GOOGLE</p>
-                                    </Button>
-                                    <Button color="success" className="social-button">
-                                        <i className="social-icon social-microsoft"
-                                           style={{backgroundImage: `url(${microsoft})`}}/>
-                                        <p className="social-text" style={{color: '#fff'}}>MICROSOFT</p>
-                                    </Button>
-                                </div>
+                                <Link className="d-block text-center mb-4" to="register">회원가입 하기</Link>
                             </div>
                         </form>
                     </Widget>

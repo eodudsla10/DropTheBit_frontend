@@ -11,17 +11,15 @@ import {
   InputGroupText,
   InputGroup,
   Input,
-  UncontrolledAlert,
+  // UncontrolledAlert,
   Dropdown,
   Collapse,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   Badge,
-  ButtonGroup,
-  Button,
-  Form,
-  FormGroup,
+  // ButtonGroup,
+  // Button,
 } from "reactstrap";
 import Notifications from "../Notifications";
 import PowerIcon from "../Icons/HeaderIcons/PowerIcon";
@@ -149,7 +147,7 @@ class Header extends React.Component {
               <BurgerIcon className={s.headerIcon} />
             </NavLink>
         </div>
-        <div className={`d-print-none ${s.root}`}>
+        {/* <div className={`d-print-none ${s.root}`}>
           <UncontrolledAlert
             className={`${s.alert} mr-3 d-lg-down-none animate__animated animate__bounceIn animate__delay-1s`}
           >
@@ -162,7 +160,7 @@ class Header extends React.Component {
             </button>{" "}
             on the right!
           </UncontrolledAlert>
-        </div>
+        </div> */}
         <div className={`d-print-none ${s.root}`}>
           <Collapse
             className={`${s.searchCollapse} ml-lg-0 mr-md-3`}
@@ -187,22 +185,6 @@ class Header extends React.Component {
               />
             </InputGroup>
           </Collapse>
-          <Form className="d-md-down-none mr-3 ml-3" inline>
-            <FormGroup>
-              <InputGroup className={`input-group-no-border ${s.searchForm}`}>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText className={s.inputGroupText}>
-                    <SearchIcon className={s.headerIcon} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  id="search-input"
-                  className="input-transparent"
-                  placeholder="Search Dashboard"
-                />
-              </InputGroup>
-            </FormGroup>
-          </Form>
 
           <Nav className="ml-md-0">
             <Dropdown
@@ -293,48 +275,6 @@ class Header extends React.Component {
                 <SettingsIcon addId='header-settings' className={s.headerIcon} />
               </DropdownToggle>
               <DropdownMenu className={`${s.dropdownMenu} ${s.settings}`}>
-                <h6>Sidebar on the</h6>
-                <ButtonGroup size="sm">
-                  <Button
-                    color="primary"
-                    onClick={() => this.moveSidebar("left")}
-                    className={
-                      this.props.sidebarPosition === "left" ? "active" : ""
-                    }
-                  >
-                    Left
-                  </Button>
-                  <Button
-                    color="primary"
-                    onClick={() => this.moveSidebar("right")}
-                    className={
-                      this.props.sidebarPosition === "right" ? "active" : ""
-                    }
-                  >
-                    Right
-                  </Button>
-                </ButtonGroup>
-                <h6 className="mt-2">Sidebar</h6>
-                <ButtonGroup size="sm">
-                  <Button
-                    color="primary"
-                    onClick={() => this.toggleVisibilitySidebar("show")}
-                    className={
-                      this.props.sidebarVisibility === "show" ? "active" : ""
-                    }
-                  >
-                    Show
-                  </Button>
-                  <Button
-                    color="primary"
-                    onClick={() => this.toggleVisibilitySidebar("hide")}
-                    className={
-                      this.props.sidebarVisibility === "hide" ? "active" : ""
-                    }
-                  >
-                    Hide
-                  </Button>
-                </ButtonGroup>
               </DropdownMenu>
             </Dropdown>
             <Dropdown

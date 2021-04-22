@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Progress, Alert} from 'reactstrap';
+// import {Progress, Alert} from 'reactstrap';
 import {withRouter} from 'react-router-dom';
 import {dismissAlert} from '../../actions/alerts';
 import s from './Sidebar.module.scss';
@@ -78,6 +78,7 @@ class Sidebar extends React.Component {
                 }}
             >
                 <header className={s.logo}>
+                    
                     <a href="/app/main">Drop the <span
                         className="fw-bold">Bit</span></a>
                 </header>
@@ -85,30 +86,30 @@ class Sidebar extends React.Component {
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
                         activeItem={this.props.activeItem}
-                        header="Dashboard"
+                        header="회원 정보"
                         isHeader
                         iconName={<HomeIcon className={s.menuIcon} />}
                         link="/app/main"
                         index="main"
                     />
-                    <h5 className={[s.navTitle, s.groupTitle].join(' ')}>CONTENTS</h5>
-                    <LinksGroup
-                        onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
-                        activeItem={this.props.activeItem}
-                        header="Typography"
-                        isHeader
-                        iconName={<TypographyIcon className={s.menuIcon} />}
-                        link="/app/typography"
-                        index="core"
-                    />
+                    <h5 className={[s.navTitle, s.groupTitle].join(' ')}>목차</h5>
                     <LinksGroup
                         onActiveSidebarItemChange={t => this.props.dispatch(changeActiveSidebarItem(t))}
                         activeItem={this.props.activeItem}
-                        header="Tables Basic"
+                        header="코인 프리미엄 보기"
                         isHeader
                         iconName={<TablesIcon className={s.menuIcon} />}
                         link="/app/tables"
                         index="tables"
+                    />
+                    <LinksGroup
+                        onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+                        activeItem={this.props.activeItem}
+                        header="업비트 정보 보기"
+                        isHeader
+                        iconName={<TypographyIcon className={s.menuIcon} />}
+                        link="/app/typography"
+                        index="core"
                     />
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -140,53 +141,6 @@ class Sidebar extends React.Component {
                         ]}
                     />
                 </ul>
-                <h5 className={s.navTitle}>
-                    LABELS
-                    {/* eslint-disable-next-line */}
-                </h5>
-                {/* eslint-disable */}
-                <ul className={s.sidebarLabels}>
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-circle text-success mr-2"/>
-                            <span className={s.labelName}>My Recent</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-circle text-primary mr-2"/>
-                            <span className={s.labelName}>Starred</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-circle text-danger mr-2"/>
-                            <span className={s.labelName}>Background</span>
-                        </a>
-                    </li>
-                </ul>
-                {/* eslint-enable */}
-                <h5 className={s.navTitle}>
-                    PROJECTS
-                </h5>
-                <div className={s.sidebarAlerts}>
-                    {this.props.alertsList.map(alert => // eslint-disable-line
-                        <Alert
-                            key={alert.id}
-                            className={s.sidebarAlert} 
-                            color="transparent"
-                            isOpen={true} // eslint-disable-line
-                            toggle={() => {
-                                this.dismissAlert(alert.id);
-                            }}
-                        >
-                            <span>{alert.title}</span><br/>
-                            <Progress className={`bg-subtle-blue progress-xs mt-1`} color={alert.color}
-                                      value={alert.value}/>
-                            <span className={s.alertFooter}>{alert.footer}</span>
-                        </Alert>,
-                    )}
-                </div>
             </nav>
         );
     }

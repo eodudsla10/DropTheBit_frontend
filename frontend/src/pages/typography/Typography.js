@@ -6,7 +6,7 @@ import Widget from "../../components/Widget";
 const Typography = () => (
   <div>
     <h1 className="page-title">
-      Typography - <span className="fw-semi-bold">Texts & Display</span>
+      업비트 - <span className="fw-semi-bold">정보 보기</span>
     </h1>
     <Row>
       <Col xs={12} lg={6}>
