@@ -18,6 +18,7 @@ class CoinInfo extends Component {
   getpost = async() => {
     const {data} = await axios.get('http://localhost:8000/main');
     this.setState({coinListFromHome: {data}.data});
+    console.log(this.state.coinListFromHome)
   }
   
   async componentDidMount() {
