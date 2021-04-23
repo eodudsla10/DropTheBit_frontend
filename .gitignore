@@ -7,7 +7,6 @@ venv/
 backend/api/dd.py
 dropthebit/test222.py
 Bitcoin.txt
-api
 # Jeongsun Choi's gitignore
 backend/test.py
 
