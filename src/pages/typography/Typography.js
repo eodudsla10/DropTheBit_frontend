@@ -6,9 +6,9 @@ import UpbitNotices from "./UpbitNotices";
 
 const Typography = () => (
   <div>
-    <h1 className="page-title">
+    <h2 className="page-title">
       업비트 - <span className="fw-semi-bold">정보 보기</span>
-    </h1>
+    </h2>
     <Row>
       <Col>
         <Widget>
@@ -16,23 +16,14 @@ const Typography = () => (
           <Table striped>
                 <thead>
                   <tr className="fs-sm">
-                    <th className="hidden-sm-down" width="3">
-                      #
+                    <th className="hidden-sm-down">
+                      id
                     </th>
-                    <th className="hidden-sm-down" width="3">
-                      Thicker
+                    <th className="hidden-sm-down">
+                      Title
                     </th>
-                    <th className="hidden-sm-down" width="3">
-                      Coin name(english)
-                    </th>
-                    <th className="hidden-sm-down" width="3">
-                      Standard_price
-                    </th>
-                    <th className="hidden-sm-down" width="3">
-                      Comparison_price
-                    </th>
-                    <th className="hidden-sm-down" width="3">
-                      Premium
+                    <th className="hidden-sm-down">
+                      Date
                     </th>
                   </tr>
                 </thead>

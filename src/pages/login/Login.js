@@ -40,8 +40,9 @@ class Login extends React.Component {
 
     doLogin(e) {
         e.preventDefault();
+        // TODO: 로그인하면 로그인 정보를 백에서 API를 받아와서 예외 처리하기
         // 여기를 작성해 주세요.
-        axios.get(`http://127.0.0.1:8000/member/register/`, { id: this.state.id, password: this.state.password }).then(res => {
+        axios.get(`http://127.0.0.1:8000/member/login/`, {params:{ user_id: this.state.id, user_pw: this.state.password }}).then(res => {
         console.log(res)});
         this.props.dispatch(loginUser({ id: this.state.id, password: this.state.password }));
     }

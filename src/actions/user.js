@@ -37,7 +37,6 @@ export function logoutUser() {
     };
 }
 
-// TODO: 로그인하면 로그인 정보를 백에서 API를 받아와서 예외 처리하기
 export function loginUser(creds) {
     return (dispatch) => {
 

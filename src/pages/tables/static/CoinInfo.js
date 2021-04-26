@@ -37,10 +37,10 @@ class CoinInfo extends Component {
                 title={row.id}
                 height="16"
               ></img>
-              <span class="text-muted fw-semi-bold">{row.id}</span>
+              <span className="text-muted fw-semi-bold">{row.id}</span>
             </td>
             <td>
-              <span class="text-muted fw-semi-bold">
+              <span className="text-muted fw-semi-bold">
                 {row.name_kr}({row.name_en})
               </span>
             </td>

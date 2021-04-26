@@ -60,10 +60,10 @@ class Dashboard extends React.Component {
       {/* tab #2 */}
       <TabPane tabId="2">
         <div>
-          <h4>회원 정보 <span className="fw-semi-bold">수정</span></h4>
-          <h5>회원 아이디 <span className="fw-semi-bold">TODO:</span></h5>
-          <h5>회원 이름 <span className="fw-semi-bold">TODO:</span></h5>
-          <h5>회원 이메일 <span className="fw-semi-bold">TODO:</span></h5>
+          <h4>회원 정보</h4>
+          <h5>회원 아이디 <span className="fw-semi-bold"></span></h5>
+          <h5>회원 이름 <span className="fw-semi-bold"></span></h5>
+          <h5>회원 이메일 <span className="fw-semi-bold"></span></h5>
         </div>
       </TabPane>
     </TabContent>

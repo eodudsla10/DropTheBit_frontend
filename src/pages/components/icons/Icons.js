@@ -62,7 +62,7 @@ class Icons extends React.Component {
 
           <TabPane tabId="1">
             <div>
-              <h4>회원 정보 <span className="fw-semi-bold">수정</span></h4>
+              <h4>회원 정보</h4>
             </div>
           </TabPane>
 

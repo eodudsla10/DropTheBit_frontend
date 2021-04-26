@@ -9,24 +9,29 @@ class UpbitNotices extends Component {
       notices: [],
     };
   }
-  
+      
   getpost = async() => {
     const {data} = await axios.get('http://localhost:8000/news');
     this.setState({notices: {data}.data});
   }
-  s
+
+  async componentDidMount() {
+    this.getpost();
+  }
+
   render() {
+    console.log(this.state.notices)
     return (
       <tbody>
         {this.state.notices.map((row) => (
           <tr key={row.id}>
             <td>{row.id}</td>
             <td>
-              <span class="text-muted fw-semi-bold">{row.data}</span>
+              <span class="text-muted fw-semi-bold">{row.title}</span>
             </td>
             <td>
               <span class="text-muted fw-semi-bold">
-                {row.title}</span>
+                {row.date}</span>
             </td>
             <td>
             </td>
